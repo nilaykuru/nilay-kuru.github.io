@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Ödevi - Nilay Kuru</title>
+    <link rel="stylesheet" href="flexbox-style.css">
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <!-- ① NAVBAR KARTI -->
+        <div class="section-card">
+            <nav class="navbar">
+                <div class="logo">LOGO</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="about.html">Hakkımda</a></li>
+                    <li><a href="interests.html">Dersler</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="bottom-tags">
+                <span class="tag">flex layout</span>
+                <span class="tag">justify-content</span>
+                <span class="tag">flex layout</span>
+                <span class="tag">10vh height</span>
+                <span class="tag">100w height</span>
+                <span class="tag">100vw width</span>
+            </div>
+        </div>
+
+        <!-- ② HERO KARTI -->
+        <div class="section-card">
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Hero Başlık</h1>
+                    <p class="hero-subtitle">Açıklama metni</p>
+                    <div class="hero-lines">
+                        <div class="line long"></div>
+                        <div class="line medium"></div>
+                    </div>
+                    <button class="btn">Buton</button>
+                </div>
+                <div class="hero-image">
+                    <svg width="64" height="56" viewBox="0 0 64 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 48L20 28L32 40L44 24L60 48H4Z" fill="#c084bc" opacity="0.35"/>
+                        <circle cx="46" cy="14" r="8" fill="#c084bc" opacity="0.35"/>
+                        <rect x="2" y="2" width="60" height="52" rx="4" stroke="#c084bc" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+            </section>
+            <div class="bottom-tags">
+                <span class="tag tag-highlight">flex-direction: row; row</span>
+                <span class="tag tag-highlight">height: 30vh</span>
+                <span class="tag tag-highlight">align-items: stretch</span>
+            </div>
+        </div>
+
+        <!-- ③ KARTLAR KARTI -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>Kartlar Bölümü</h2>
+                <div class="header-tags">
+                    <span class="tag">multiple items</span>
+                    <span class="tag">flex layout – wrap</span>
+                </div>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Kart Başlığı</h3>
+                    <p>Kısa açıklama</p>
+                    <div class="card-divider"></div>
+                    <button class="btn">Buton</button>
+                </div>
+                <div class="card">
+                    <h3>Kart Başlığı</h3>
+                    <p>Kısa açıklama</p>
+                    <div class="card-divider"></div>
+                    <button class="btn">Buton</button>
+                </div>
+                <div class="card">
+                    <h3>Kart Başlığı</h3>
+                    <p>Kısa açıklama</p>
+                    <div class="card-divider"></div>
+                    <button class="btn">Buton</button>
+                </div>
+                <div class="card">
+                    <h3>Kart Başlığı</h3>
+                    <p>Kısa açıklama</p>
+                    <div class="card-divider"></div>
+                    <button class="btn">Buton</button>
+                </div>
+            </div>
+            <div class="bottom-tags">
+                <span class="tag">flex-direction</span>
+                <span class="tag">flex layout + wrap</span>
+                <span class="tag">gap + align/hizalama</span>
+                <span class="tag">height iç: 30vh</span>
+            </div>
+        </div>
+
+        <!-- ④ FLEX GROW (BUTONLU) -->
+        <div class="section-card section-card--accent">
+            <div class="section-header">
+                <h2>Flex Grow Uygulama</h2>
+                <div class="header-tags">
+                    <span class="tag tag-highlight">flex-grow:</span>
+                    <span class="tag tag-highlight">height: 20vh</span>
+                    <span class="tag tag-highlight">stretch (esneme)</span>
+                </div>
+            </div>
+            <div class="grow-container">
+                <div class="grow-box box1">
+                    <strong>1 Kutu</strong>
+                    <code>flex-grow: 1;</code>
+                    <button class="btn btn-box1">Buton</button>
+                </div>
+                <div class="grow-box box2">
+                    <strong>2 Kutu</strong>
+                    <code>flex-grow: 2;</code>
+                    <button class="btn btn-box2">Buton</button>
+                </div>
+                <div class="grow-box box3">
+                    <strong>3 Kutu</strong>
+                    <code>flex-grow: 1;</code>
+                    <button class="btn btn-box3">Buton</button>
+                </div>
+            </div>
+            <div class="bottom-tags">
+                <span class="tag">multiple items</span>
+                <span class="tag">flex layout + wrap</span>
+                <span class="tag">gap + align/hizalama</span>
+            </div>
+        </div>
+
+        <!-- ⑤ FLEX GROW (BUTONSUZ) -->
+        <div class="section-card section-card--accent">
+            <div class="section-header">
+                <h2>Flex Grow Uygulama</h2>
+                <div class="header-tags">
+                    <span class="tag tag-highlight">flex-grow:</span>
+                    <span class="tag tag-highlight">height: 20vh</span>
+                    <span class="tag tag-highlight">stretch (esneme)</span>
+                </div>
+            </div>
+            <div class="grow-container grow-container--short">
+                <div class="grow-box box1">
+                    <strong>1 Kutu</strong>
+                    <code>flex-grow: 1;</code>
+                </div>
+                <div class="grow-box box2">
+                    <strong>2 Kutu</strong>
+                    <code>flex-grow: 2;</code>
+                </div>
+                <div class="grow-box box3">
+                    <strong>3 Kutu</strong>
+                    <code>flex-grow: 1;</code>
+                </div>
+            </div>
+            <div class="bottom-tags">
+                <span class="tag">flex-grow</span>
+                <span class="tag">height: 20vh</span>
+                <span class="tag">stretch (esneme)</span>
+            </div>
+        </div>
+
+        <!-- ⑥ FOOTER -->
+        <footer class="footer">
+            <p>© 2026 – Nilay Kuru | Flexbox Lab Ödevi</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
