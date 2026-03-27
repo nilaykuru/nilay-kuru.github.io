@@ -2,55 +2,262 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nilay Kuru - Ana Sayfa</title>
+    <style>
+        /* =============================================
+           GENEL SAYFA — Renk paleti: css-odevi ile aynı
+           ============================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Grup seçici */
+        h1, h2, p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf9fc;
+            color: #4a235a;
+            padding: 20px 50px;
+        }
+
+        /* =============================================
+           HEADER
+           ============================================= */
+        header {
+            border-bottom: 2px solid #d8bfd8;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            display: inline-block;
+            margin: 0;
+            color: #9370db;
+        }
+
+        header p {
+            color: #7a4d8a;
+            margin-top: 4px;
+            font-size: 0.95rem;
+        }
+
+        /* =============================================
+           NAVİGASYON
+           ============================================= */
+        nav {
+            margin-top: 12px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Hiyerarşik seçici + yatay menü */
+        nav ul li {
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 6px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            background-color: #d8bfd8;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        /* Hover efekti */
+        nav ul li a:hover {
+            background-color: #ffb6c1;
+            color: #fff;
+        }
+
+        /* Flexbox ödevi butonu öne çıksın */
+        nav ul li a.highlight {
+            background-color: #9370db;
+        }
+
+        nav ul li a.highlight:hover {
+            background-color: #ffb6c1;
+        }
+
+        /* =============================================
+           MAIN İÇERİK
+           ============================================= */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Giriş kutusu */
+        .intro {
+            background-color: #fff0f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #ffb6c1;
+        }
+
+        .intro p {
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #555;
+        }
+
+        /* Yan yana kutular */
+        .kutu-kapsayici {
+            width: 100%;
+            font-size: 0;
+            margin-bottom: 30px;
+        }
+
+        .icerik-kutusu, .yan-menu-kutusu {
+            display: inline-block;
+            vertical-align: top;
+            box-sizing: border-box;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 15px;
+        }
+
+        .icerik-kutusu {
+            width: 60%;
+            background-color: #fff0f5;
+            border: 2px solid #ffb6c1;
+            margin-right: 4%;
+        }
+
+        .yan-menu-kutusu {
+            width: 36%;
+            background-color: #f3e5f5;
+            border: 2px solid #d8bfd8;
+        }
+
+        /* Hiyerarşik seçici + 3 CSS özelliği */
+        .icerik-kutusu p, .yan-menu-kutusu p {
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #555;
+        }
+
+        .icerik-kutusu h2, .yan-menu-kutusu h2 {
+            color: #9370db;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .icerik-kutusu ul, .icerik-kutusu ol {
+            padding-left: 1.3rem;
+            margin: 8px 0;
+        }
+
+        .icerik-kutusu li {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .icerik-kutusu a {
+            color: #9370db;
+            text-decoration: underline;
+        }
+
+        .icerik-kutusu strong { color: #4a235a; }
+
+        /* =============================================
+           FOOTER
+           ============================================= */
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #d8bfd8;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        footer p {
+            margin: 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d8bfd8;
+            margin: 12px 0;
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>Nilay Kuru</h1>
         <p>Bilgisayar Mühendisliği | Web Programlama Öğrencisi</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="about.html">Hakkımda</a></li>
+                <li><a href="interests.html">İlgi Alanlarım</a></li>
+                <li><a href="css-odevi.html">CSS Ödevi</a></li>
+                <li><a href="flexbox-odevi.html">Flexbox Ödevi</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="about.html">Hakkımda</a></li>
-            <li><a href="interests.html">İlgi Alanlarım</a></li>
-            <li><a href="css-odevi.html">CSS Ödevi</a></li> <li><a href="contact.html">İletişim</a></li>
-        </ul>
-    </nav>
-
     <main>
-        <h2>Hoş Geldiniz</h2>
-        <p>Bu web sitesi, Web Programlama dersi kapsamında hazırlanmış <strong>örnek bir kişisel tanıtım sayfasıdır</strong>. Amaç, HTML'in temel etiketlerini ve sayfa yapısını öğrenmektir.</p>
-        <p>Daha fazla bilgi için <em>Hakkımda</em> sayfasını ziyaret edebilirsiniz.</p>
+        <section class="intro">
+            <p>Bu web sitesi, Web Programlama dersi kapsamında hazırlanmış <strong>örnek bir kişisel tanıtım sayfasıdır</strong>. Amaç, HTML'in temel etiketlerini ve sayfa yapısını öğrenmektir. Daha fazla bilgi için <em>Hakkımda</em> sayfasını ziyaret edebilirsiniz.</p>
+        </section>
 
-        <h2>Hızlı Bilgiler</h2>
-        <ul>
-            <li>Üniversite: Marmara Üniversitesi</li>
-            <li>Bölüm: Bilgisayar Mühendisliği</li>
-            <li>İlgi Alanı: Web Teknolojileri</li>
-        </ul>
+        <div class="kutu-kapsayici">
+            <div class="icerik-kutusu">
+                <h2>Hızlı Bilgiler</h2>
+                <ul>
+                    <li>Üniversite: Marmara Üniversitesi</li>
+                    <li>Bölüm: Bilgisayar Mühendisliği</li>
+                    <li>İlgi Alanı: Web Teknolojileri</li>
+                </ul>
 
-        <h2>Öğrenme Hedeflerim</h2>
-        <ol>
-            <li>HTML temellerini öğrenmek</li>
-            <li>CSS ile sayfa tasarlamak</li>
-            <li>JavaScript ile etkileşim eklemek</li>
-            <li>ASP.NET Core ile dinamik site geliştirmek</li>
-        </ol>
+                <h2>Öğrenme Hedeflerim</h2>
+                <ol>
+                    <li>HTML temellerini öğrenmek</li>
+                    <li>CSS ile sayfa tasarlamak</li>
+                    <li>JavaScript ile etkileşim eklemek</li>
+                    <li>ASP.NET Core ile dinamik site geliştirmek</li>
+                </ol>
+            </div>
 
-        <h2>Faydalı Bağlantılar</h2>
-        <p>Aşağıdaki kaynaklar web geliştirme öğrenirken faydalı olabilir:</p>
-        <ul>
-            <li><a href="https://developer.mozilla.org/tr/">MDN Web Docs</a></li>
-            <li><a href="https://www.w3schools.com/">W3Schools</a></li>
-            <li><a href="https://github.com/">GitHub</a></li>
-        </ul>
+            <aside class="yan-menu-kutusu">
+                <h2>Faydalı Bağlantılar</h2>
+                <p>Aşağıdaki kaynaklar web geliştirme öğrenirken faydalı olabilir:</p>
+                <p>
+                    <a href="https://developer.mozilla.org/tr/">MDN Web Docs</a><br><br>
+                    <a href="https://www.w3schools.com/">W3Schools</a><br><br>
+                    <a href="https://github.com/">GitHub</a>
+                </p>
+            </aside>
+        </div>
     </main>
 
     <footer>
-        <hr>
         <p>© 2026 Nilay Kuru | Web Programlama Dersi</p>
     </footer>
+
 </body>
 </html>
