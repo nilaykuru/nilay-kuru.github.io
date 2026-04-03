@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Position Ödevi - Nilay Kuru</title>
+    <style>
+
+        /* =============================================
+           GENEL SAYFA
+           ============================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf9fc;
+            color: #4a235a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 40px;
+        }
+
+        /* =============================================
+           FIXED ÖĞELER
+           ============================================= */
+
+        /* Sol üst: Ana Sayfaya Dön butonu — position: fixed */
+        .fixed-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #9370db;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.88rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 10px rgba(147, 112, 219, 0.35);
+        }
+
+        .fixed-back:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        /* Sağ alt: Yardımcı Menü butonu — position: fixed */
+        .fixed-menu {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1000;
+            background-color: #9370db;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 16px rgba(147, 112, 219, 0.4);
+            /* Keyframes animasyonu */
+            animation: pulse 2.5s infinite;
+        }
+
+        .fixed-menu:hover {
+            background-color: #ffb6c1;
+            transform: scale(1.07);
+            cursor: pointer;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 4px 16px rgba(147, 112, 219, 0.4); }
+            50%  { box-shadow: 0 4px 28px rgba(147, 112, 219, 0.75); }
+            100% { box-shadow: 0 4px 16px rgba(147, 112, 219, 0.4); }
+        }
+
+        /* =============================================
+           ANA KART KAPSAYICI — position: relative
+           ============================================= */
+        .kart-kapsayici {
+            position: relative;          /* ✅ position: relative */
+            width: 100%;
+            max-width: 560px;
+            min-height: 380px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e8d5f5 40%, #fff0f5 100%);
+            border-radius: 20px;
+            padding: 48px 40px 50px;
+            box-shadow: 0 8px 32px rgba(147, 112, 219, 0.15);
+            border: 1px solid #d8bfd8;
+            overflow: hidden;
+        }
+
+        /* Dekoratif arka plan dairesi — z-index ile üst üste */
+        .dekoratif-daire {
+            position: absolute;          /* ✅ position: absolute */
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(216, 191, 216, 0.35);
+            z-index: 1;                  /* ✅ z-index */
+        }
+
+        /* Kart içeriği dairenin önünde kalsın */
+        .kart-icerik {
+            position: relative;
+            z-index: 2;                  /* ✅ z-index — içerik dairenin önünde */
+        }
+
+        .kart-icerik h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #4a235a;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .kart-icerik p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #5d3068;
+            max-width: 300px;
+        }
+
+        /* =============================================
+           ABSOLUTE ROZETLER / ETİKETLER
+           ============================================= */
+
+        /* Rozet 1 — Sol üst: "Ücretsiz" — position: absolute */
+        .rozet-ucretsiz {
+            position: absolute;          /* ✅ position: absolute */
+            top: 22px;
+            left: 22px;
+            z-index: 3;
+            background-color: #fffde7;
+            border: 1.5px solid #ffe082;
+            color: #5d4037;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .rozet-ucretsiz:hover {
+            background-color: #fff9c4;
+            transform: scale(1.08);
+            cursor: pointer;
+        }
+
+        /* Rozet 2 — Sağ üst: "24 Nisan" — position: absolute */
+        .rozet-tarih {
+            position: absolute;          /* ✅ position: absolute */
+            top: 22px;
+            right: 22px;
+            z-index: 3;
+            background-color: #e8f5e9;
+            border: 1.5px solid #a5d6a7;
+            color: #2e7d32;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .rozet-tarih:hover {
+            background-color: #c8e6c9;
+            transform: scale(1.08);
+            cursor: pointer;
+        }
+
+        /* Rozet 3 — Orta: "Konum" kutusu — position: absolute */
+        .rozet-konum {
+            position: absolute;          /* ✅ position: absolute */
+            bottom: 80px;
+            right: 28px;
+            z-index: 3;
+            background-color: #ffffff;
+            border: 1.5px solid #d8bfd8;
+            color: #4a235a;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(147, 112, 219, 0.12);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            /* Keyframes ile hafif salınım */
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .rozet-konum:hover {
+            box-shadow: 0 4px 18px rgba(147, 112, 219, 0.28);
+            transform: translateY(-3px);
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Rozet 4 — Sağ alt: "Son Kayıt" — position: absolute */
+        .rozet-sonkayit {
+            position: absolute;          /* ✅ position: absolute */
+            bottom: 22px;
+            right: 22px;
+            z-index: 3;
+            background-color: #fce4ec;
+            border: 1.5px solid #ffb6c1;
+            color: #880e4f;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .rozet-sonkayit:hover {
+            background-color: #ffb6c1;
+            color: #fff;
+            transform: scale(1.08);
+            cursor: pointer;
+        }
+
+        /* :active efekti */
+        .rozet-sonkayit:active {
+            transform: scale(0.95);
+            background-color: #f48fb1;
+        }
+
+        /* =============================================
+           FOOTER
+           ============================================= */
+        .sayfa-footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #9370db;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- FIXED: Sol üst geri butonu -->
+    <a href="index.html" class="fixed-back">← Ana Sayfaya Dön</a>
+
+    <!-- FIXED: Sağ alt yardımcı menü -->
+    <div class="fixed-menu">Yardımcı Menü</div>
+
+    <!-- ANA KART — position: relative -->
+    <div class="kart-kapsayici">
+
+        <!-- Dekoratif daire (z-index: 1) -->
+        <div class="dekoratif-daire"></div>
+
+        <!-- ABSOLUTE: Sol üst rozet -->
+        <div class="rozet-ucretsiz">Ücretsiz</div>
+
+        <!-- ABSOLUTE: Sağ üst tarih rozeti -->
+        <div class="rozet-tarih">24 Nisan</div>
+
+        <!-- İçerik (z-index: 2, dairenin önünde) -->
+        <div class="kart-icerik">
+            <h1>Teknoloji Topluluğu Etkinliği</h1>
+            <p>Bu örnek sayfada amaç; CSS position özelliklerini kullanarak tek bir duyuru kartı üzerinde relative, absolute, fixed, z-index, hover, cursor ve animasyon mantığını birlikte göstermektir.</p>
+        </div>
+
+        <!-- ABSOLUTE: Orta konum kutusu -->
+        <div class="rozet-konum">📍 Konum: T4  Binası </div>
+
+        <!-- ABSOLUTE: Sağ alt son kayıt -->
+        <div class="rozet-sonkayit">Son Kayıt</div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="sayfa-footer">
+        <p>2026 – LAB Position Örnek Çalışması</p>
+    </footer>
+
+</body>
+</html>
