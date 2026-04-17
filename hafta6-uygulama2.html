@@ -1,0 +1,417 @@
+
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birim Dönüştürücü - Nilay Kuru</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        h1, h2, h3, p, label {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf9fc;
+            color: #4a235a;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .fixed-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #9370db;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 2px 10px rgba(147,112,219,0.3);
+        }
+        .fixed-back:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-2px);
+        }
+
+        .sayfa-baslik {
+            text-align: center;
+            margin: 60px 0 30px;
+        }
+        .sayfa-baslik h1 {
+            font-size: 1.9rem;
+            color: #9370db;
+            font-weight: 800;
+        }
+        .sayfa-baslik p {
+            color: #7a4d8a;
+            margin-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* İki kolon yan yana */
+        .iki-kolon {
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+            max-width: 860px;
+            margin: 0 auto 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .kart {
+            background-color: #fff0f5;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            padding: 28px;
+            flex: 1 1 360px;
+            min-width: 300px;
+            max-width: 420px;
+        }
+
+        .kart h2 {
+            font-size: 1.3rem;
+            color: #4a235a;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-grup {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #7a4d8a;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #4a235a;
+            background-color: #fff;
+            transition: border-color 0.2s;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #9370db;
+        }
+
+        select option:checked,
+        select option:hover {
+            background-color: #9370db;
+            color: #fff;
+        }
+
+        .btn-hesapla {
+            width: 100%;
+            padding: 12px;
+            background-color: #9370db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.3s ease, transform 0.15s;
+        }
+
+        .btn-hesapla:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-1px);
+        }
+
+        .btn-hesapla:active {
+            transform: scale(0.98);
+        }
+
+        /* Sonuç kutusu */
+        .sonuc-kutu {
+            margin-top: 16px;
+            background-color: #f3e5f5;
+            border: 2px solid #d8bfd8;
+            border-radius: 8px;
+            padding: 14px 18px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .sonuc-kutu p {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4a235a;
+        }
+
+        .sonuc-kutu span {
+            color: #9370db;
+            font-size: 1.1rem;
+        }
+
+        .hata-mesaj {
+            color: #c62828;
+            font-size: 0.82rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        /* Bilgi tablosu */
+        .bilgi-kart {
+            background-color: #fff0f5;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 10px;
+            padding: 20px 28px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .bilgi-kart h3 {
+            font-size: 1rem;
+            color: #9370db;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        .bilgi-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .bilgi-item {
+            background-color: #f3e5f5;
+            border: 1px solid #d8bfd8;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            color: #5d3068;
+        }
+
+        footer {
+            margin: 30px auto 0;
+            padding: 15px;
+            background-color: #d8bfd8;
+            text-align: center;
+            border-radius: 5px;
+            max-width: 860px;
+        }
+        footer p { color: white; font-weight: bold; font-size: 0.88rem; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="fixed-back">← Ana Sayfaya Dön</a>
+
+    <div class="sayfa-baslik">
+        <h1>Birim Dönüştürücü</h1>
+        <p>Sıcaklık, Uzunluk ve Kütle dönüşümleri</p>
+    </div>
+
+    <div class="iki-kolon">
+
+        <!-- KART 1 — Sıcaklık Dönüşümü -->
+        <div class="kart">
+            <h2>🌡️ Sıcaklık Dönüştürücü</h2>
+
+            <div class="form-grup">
+                <label for="sicaklik-deger">Değer Giriniz:</label>
+                <input type="number" id="sicaklik-deger" placeholder="Örn: 50">
+                <span class="hata-mesaj" id="hata-sicaklik">Geçerli bir sayı girin.</span>
+            </div>
+
+            <div class="form-grup">
+                <label for="sicaklik-tip">Dönüşüm Tipi:</label>
+                <select id="sicaklik-tip">
+                    <option value="c-f">Celsius → Fahrenheit</option>
+                    <option value="f-c">Fahrenheit → Celsius</option>
+                    <option value="c-k">Celsius → Kelvin</option>
+                    <option value="k-c">Kelvin → Celsius</option>
+                    <option value="f-k">Fahrenheit → Kelvin</option>
+                    <option value="k-f">Kelvin → Fahrenheit</option>
+                </select>
+            </div>
+
+            <button class="btn-hesapla" onclick="sicaklikHesapla()">Hesapla</button>
+
+            <div class="sonuc-kutu" id="sonuc-sicaklik">
+                <p>Sonuç: <span id="sonuc-sicaklik-deger"></span></p>
+            </div>
+        </div>
+
+        <!-- KART 2 — Uzunluk / Kütle Dönüşümü -->
+        <div class="kart">
+            <h2>📏 Uzunluk & Kütle Dönüştürücü</h2>
+
+            <div class="form-grup">
+                <label for="birim-deger">Değer Giriniz:</label>
+                <input type="number" id="birim-deger" placeholder="Örn: 50">
+                <span class="hata-mesaj" id="hata-birim">Geçerli bir sayı girin.</span>
+            </div>
+
+            <div class="form-grup">
+                <label for="birim-tip">Dönüşüm Tipi:</label>
+                <select id="birim-tip">
+                    <optgroup label="Uzunluk">
+                        <option value="m-km">Metre → Kilometre</option>
+                        <option value="km-m">Kilometre → Metre</option>
+                        <option value="m-mil">Metre → Mil</option>
+                        <option value="mil-m">Mil → Metre</option>
+                        <option value="km-mil">Kilometre → Mil</option>
+                        <option value="mil-km">Mil → Kilometre</option>
+                    </optgroup>
+                    <optgroup label="Kütle">
+                        <option value="kg-g">Kilogram → Gram</option>
+                        <option value="g-kg">Gram → Kilogram</option>
+                        <option value="kg-lb">Kilogram → Pound</option>
+                        <option value="lb-kg">Pound → Kilogram</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <button class="btn-hesapla" onclick="birimHesapla()">Hesapla</button>
+
+            <div class="sonuc-kutu" id="sonuc-birim">
+                <p>Sonuç: <span id="sonuc-birim-deger"></span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Formüller Bilgi Kartı -->
+    <div class="bilgi-kart">
+        <h3>📐 Kullanılan Formüller</h3>
+        <div class="bilgi-grid">
+            <div class="bilgi-item">°C → °F : (C × 9/5) + 32</div>
+            <div class="bilgi-item">°F → °C : (F − 32) × 5/9</div>
+            <div class="bilgi-item">°C → K : C + 273.15</div>
+            <div class="bilgi-item">K → °C : K − 273.15</div>
+            <div class="bilgi-item">1 km = 1000 m</div>
+            <div class="bilgi-item">1 mil = 1609.344 m</div>
+            <div class="bilgi-item">1 kg = 1000 g</div>
+            <div class="bilgi-item">1 kg = 2.20462 lb</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Nilay Kuru | Hafta 6 – Uygulama 2</p>
+    </footer>
+
+    <script>
+        /* =====================
+           SICAKLIK HESAPLAMA
+        ===================== */
+        function sicaklikHesapla() {
+            var deger = parseFloat(document.getElementById('sicaklik-deger').value);
+            var tip   = document.getElementById('sicaklik-tip').value;
+            var hata  = document.getElementById('hata-sicaklik');
+
+            if (isNaN(deger)) {
+                hata.style.display = 'block';
+                document.getElementById('sonuc-sicaklik').style.display = 'none';
+                return;
+            }
+            hata.style.display = 'none';
+
+            var sonuc;
+            var birim;
+
+            switch (tip) {
+                case 'c-f': sonuc = (deger * 9/5) + 32;       birim = '°F'; break;
+                case 'f-c': sonuc = (deger - 32) * 5/9;       birim = '°C'; break;
+                case 'c-k': sonuc = deger + 273.15;            birim = 'K';  break;
+                case 'k-c': sonuc = deger - 273.15;            birim = '°C'; break;
+                case 'f-k': sonuc = (deger - 32) * 5/9 + 273.15; birim = 'K'; break;
+                case 'k-f': sonuc = (deger - 273.15) * 9/5 + 32; birim = '°F'; break;
+            }
+
+            document.getElementById('sonuc-sicaklik-deger').textContent =
+                sonuc.toFixed(3) + ' ' + birim;
+
+            goster('sonuc-sicaklik');
+        }
+
+        /* =====================
+           BİRİM HESAPLAMA
+        ===================== */
+        function birimHesapla() {
+            var deger = parseFloat(document.getElementById('birim-deger').value);
+            var tip   = document.getElementById('birim-tip').value;
+            var hata  = document.getElementById('hata-birim');
+
+            if (isNaN(deger)) {
+                hata.style.display = 'block';
+                document.getElementById('sonuc-birim').style.display = 'none';
+                return;
+            }
+            hata.style.display = 'none';
+
+            var sonuc;
+            var birim;
+
+            switch (tip) {
+                case 'm-km':  sonuc = deger / 1000;        birim = 'km';    break;
+                case 'km-m':  sonuc = deger * 1000;        birim = 'm';     break;
+                case 'm-mil': sonuc = deger / 1609.344;    birim = 'mil';   break;
+                case 'mil-m': sonuc = deger * 1609.344;    birim = 'm';     break;
+                case 'km-mil':sonuc = deger / 1.609344;    birim = 'mil';   break;
+                case 'mil-km':sonuc = deger * 1.609344;    birim = 'km';    break;
+                case 'kg-g':  sonuc = deger * 1000;        birim = 'g';     break;
+                case 'g-kg':  sonuc = deger / 1000;        birim = 'kg';    break;
+                case 'kg-lb': sonuc = deger * 2.20462;     birim = 'lb';    break;
+                case 'lb-kg': sonuc = deger / 2.20462;     birim = 'kg';    break;
+            }
+
+            // Büyük sayılar için locale formatı, küçükler için fixed
+            var gosterim = sonuc >= 1000
+                ? sonuc.toLocaleString('tr-TR', {maximumFractionDigits: 3})
+                : sonuc.toFixed(5).replace(/\.?0+$/, '');
+
+            document.getElementById('sonuc-birim-deger').textContent =
+                gosterim + ' ' + birim;
+
+            goster('sonuc-birim');
+        }
+
+        /* Animasyonlu göster */
+        function goster(id) {
+            var el = document.getElementById(id);
+            el.style.display = 'none';
+            setTimeout(function() { el.style.display = 'block'; }, 10);
+        }
+
+        /* Enter tuşuyla tetikle */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                sicaklikHesapla();
+                birimHesapla();
+            }
+        });
+    </script>
+
+</body>
+</html>

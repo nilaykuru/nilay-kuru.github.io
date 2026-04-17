@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Not Hesaplama - Nilay Kuru</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        h1, h2, h3, p, label {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf9fc;
+            color: #4a235a;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        /* Geri butonu — fixed */
+        .fixed-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #9370db;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 2px 10px rgba(147,112,219,0.3);
+        }
+        .fixed-back:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-2px);
+        }
+
+        .sayfa-baslik {
+            text-align: center;
+            margin: 60px 0 30px;
+        }
+        .sayfa-baslik h1 {
+            font-size: 1.9rem;
+            color: #9370db;
+            font-weight: 800;
+        }
+        .sayfa-baslik p {
+            color: #7a4d8a;
+            margin-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* Form Kartı */
+        .kart {
+            background-color: #fff0f5;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 520px;
+            margin: 0 auto 24px;
+        }
+
+        .kart h2 {
+            font-size: 1.3rem;
+            color: #4a235a;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-grup {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #7a4d8a;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #4a235a;
+            background-color: #fff;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #9370db;
+        }
+
+        .btn-hesapla {
+            width: 100%;
+            padding: 12px;
+            background-color: #9370db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.3s ease, transform 0.15s;
+        }
+
+        .btn-hesapla:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-1px);
+        }
+
+        .btn-hesapla:active {
+            transform: scale(0.98);
+        }
+
+        /* Sonuç Kartı */
+        .sonuc-kart {
+            background-color: #f3e5f5;
+            border: 2px solid #d8bfd8;
+            border-radius: 10px;
+            padding: 24px 30px;
+            max-width: 520px;
+            margin: 0 auto;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .sonuc-kart h3 {
+            font-size: 1.1rem;
+            color: #4a235a;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .sonuc-satir {
+            font-size: 0.95rem;
+            color: #5d3068;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .sonuc-satir span {
+            font-weight: bold;
+            color: #9370db;
+        }
+
+        .gecti-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+
+        .gecti { background-color: #e8f5e9; color: #2e7d32; border: 1.5px solid #a5d6a7; }
+        .kaldi { background-color: #fce4ec; color: #c62828; border: 1.5px solid #ffb6c1; }
+
+        .hata-mesaj {
+            color: #c62828;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* Harf Notu tablosu */
+        .tablo-kart {
+            background-color: #fff0f5;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 10px;
+            padding: 20px 30px;
+            max-width: 520px;
+            margin: 24px auto 0;
+        }
+
+        .tablo-kart h3 {
+            font-size: 1rem;
+            color: #9370db;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background-color: #d8bfd8;
+            color: #fff;
+            padding: 7px 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 6px 12px;
+            border-bottom: 1px solid #f3e5f5;
+            color: #4a235a;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) td { background-color: #f9f0ff; }
+
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #d8bfd8;
+            text-align: center;
+            border-radius: 5px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer p { color: white; font-weight: bold; font-size: 0.88rem; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="fixed-back">← Ana Sayfaya Dön</a>
+
+    <div class="sayfa-baslik">
+        <h1>Öğrenci Not Hesaplama</h1>
+        <p>Vize %40 + Final %60 → Ortalama, Harf Notu ve Durum</p>
+    </div>
+
+    <!-- FORM KARTI -->
+    <div class="kart">
+        <h2>Bilgileri Girin</h2>
+
+        <div class="form-grup">
+            <label for="adSoyad">Ad Soyad</label>
+            <input type="text" id="adSoyad" placeholder="Örn: Nilay Kuru">
+            <span class="hata-mesaj" id="hata-ad">Ad Soyad boş bırakılamaz.</span>
+        </div>
+
+        <div class="form-grup">
+            <label for="vizeNotu">Vize Notu (0–100)</label>
+            <input type="text" id="vizeNotu" placeholder="Örn: 75">
+            <span class="hata-mesaj" id="hata-vize">Geçerli bir vize notu girin (0–100).</span>
+        </div>
+
+        <div class="form-grup">
+            <label for="finalNotu">Final Notu (0–100)</label>
+            <input type="text" id="finalNotu" placeholder="Örn: 80">
+            <span class="hata-mesaj" id="hata-final">Geçerli bir final notu girin (0–100).</span>
+        </div>
+
+        <button class="btn-hesapla" onclick="hesapla()">Hesapla</button>
+    </div>
+
+    <!-- SONUÇ KARTI -->
+    <div class="sonuc-kart" id="sonucKart">
+        <h3 id="sonuc-ad"></h3>
+        <div class="sonuc-satir">Ortalama: <span id="sonuc-ortalama"></span></div>
+        <div class="sonuc-satir">Harf Notu: <span id="sonuc-harf"></span></div>
+        <div class="sonuc-satir">
+            Durum: <span id="sonuc-durum-badge"></span>
+        </div>
+    </div>
+
+    <!-- HARF NOTU TABLOSU -->
+    <div class="tablo-kart">
+        <h3>Harf Notu Skalası</h3>
+        <table>
+            <thead>
+                <tr><th>Aralık</th><th>Harf Notu</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>90 – 100</td><td>AA</td></tr>
+                <tr><td>85 – 89</td><td>BA</td></tr>
+                <tr><td>75 – 84</td><td>BB</td></tr>
+                <tr><td>70 – 74</td><td>CB</td></tr>
+                <tr><td>60 – 69</td><td>CC</td></tr>
+                <tr><td>55 – 59</td><td>DC</td></tr>
+                <tr><td>50 – 54</td><td>DD</td></tr>
+                <tr><td>45 – 49</td><td>FD</td></tr>
+                <tr><td>0 – 44</td><td>FF</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer style="margin-top:30px;">
+        <p>© 2026 Nilay Kuru | Hafta 6 – Uygulama 1</p>
+    </footer>
+
+    <script>
+        function harfNotu(ort) {
+            if (ort >= 90) return 'AA';
+            if (ort >= 85) return 'BA';
+            if (ort >= 75) return 'BB';
+            if (ort >= 70) return 'CB';
+            if (ort >= 60) return 'CC';
+            if (ort >= 55) return 'DC';
+            if (ort >= 50) return 'DD';
+            if (ort >= 45) return 'FD';
+            return 'FF';
+        }
+
+        function gizleHatalar() {
+            document.getElementById('hata-ad').style.display    = 'none';
+            document.getElementById('hata-vize').style.display  = 'none';
+            document.getElementById('hata-final').style.display = 'none';
+        }
+
+        function hesapla() {
+            gizleHatalar();
+
+            var ad    = document.getElementById('adSoyad').value.trim();
+            var vize  = document.getElementById('vizeNotu').value.trim();
+            var final = document.getElementById('finalNotu').value.trim();
+
+            var gecerli = true;
+
+            if (ad === '') {
+                document.getElementById('hata-ad').style.display = 'block';
+                gecerli = false;
+            }
+
+            var vizeNum = parseFloat(vize);
+            if (vize === '' || isNaN(vizeNum) || vizeNum < 0 || vizeNum > 100) {
+                document.getElementById('hata-vize').style.display = 'block';
+                gecerli = false;
+            }
+
+            var finalNum = parseFloat(final);
+            if (final === '' || isNaN(finalNum) || finalNum < 0 || finalNum > 100) {
+                document.getElementById('hata-final').style.display = 'block';
+                gecerli = false;
+            }
+
+            if (!gecerli) {
+                document.getElementById('sonucKart').style.display = 'none';
+                return;
+            }
+
+            var ortalama = (vizeNum * 0.4) + (finalNum * 0.6);
+            var harf     = harfNotu(ortalama);
+            var durum    = ortalama >= 50 ? 'Geçti' : 'Kaldı';
+            var durumClass = ortalama >= 50 ? 'gecti' : 'kaldi';
+
+            document.getElementById('sonuc-ad').textContent        = ad;
+            document.getElementById('sonuc-ortalama').textContent  = ortalama.toFixed(2);
+            document.getElementById('sonuc-harf').textContent      = harf;
+
+            var badge = document.getElementById('sonuc-durum-badge');
+            badge.textContent  = durum;
+            badge.className    = 'gecti-badge ' + durumClass;
+
+            var kart = document.getElementById('sonucKart');
+            kart.style.display = 'none';
+            // Yeniden göster → animasyon tetiklensin
+            setTimeout(function() { kart.style.display = 'block'; }, 10);
+        }
+
+        // Enter tuşuyla da çalışsın
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') hesapla();
+        });
+    </script>
+
+</body>
+</html>
