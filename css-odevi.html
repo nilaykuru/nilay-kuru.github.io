@@ -1,129 +1,8 @@
-<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <title>CSS Temel Ödevi</title>
-    <style>
-        /* Genel Sayfa Ayarları */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fcf9fc; 
-            margin: 0;
-            padding: 20px 50px;
-            color: #4a235a;
-        }
-
-        /* İstenen Kural: 1 Adet Grup Seçici */
-        h1, h2, p {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* Header ve Menü Düzeni */
-        header {
-            border-bottom: 2px solid #d8bfd8; 
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            display: inline-block; 
-            margin: 0;
-            color: #9370db; 
-        }
-
-        nav {
-            display: inline-block;
-            float: right; 
-            margin-top: 5px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* İstenen Kural: Yatay menü (display: inline-block) ve Hiyerarşik Seçici */
-        nav ul li {
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        /* İstenen Kural: Linklere hover efekti */
-        nav ul li a {
-            text-decoration: none;
-            background-color: #d8bfd8; 
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: #ffb6c1; /* Hover durumunda pembe */
-            color: #fff;
-        }
-
-        /* Giriş metni alanı */
-        .intro {
-            background-color: #fff0f5; 
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #ffb6c1;
-        }
-
-        /* Kutuları yan yana getirme */
-        .kutu-kapsayici {
-            width: 100%;
-            font-size: 0; 
-        }
-
-        .icerik-kutusu, .yan-menu-kutusu {
-            display: inline-block; /* Yan yana getirme mantığı */
-            vertical-align: top;
-            box-sizing: border-box; 
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .icerik-kutusu {
-            width: 60%;
-            background-color: #fff0f5; /* Pembe kutu */
-            border: 2px solid #ffb6c1; 
-            margin-right: 4%; 
-        }
-
-        .yan-menu-kutusu {
-            width: 36%;
-            background-color: #f3e5f5; /* Lila kutu */
-            border: 2px solid #d8bfd8; 
-        }
-
-        /* İstenen Kural: Hiyerarşik Seçici ve Paragraflarda 3 CSS özelliği */
-        .icerik-kutusu p, .yan-menu-kutusu p {
-            font-size: 15px;            
-            line-height: 1.6;           
-            text-align: justify;        
-            color: #555;                
-        }
-
-        /* Footer Ayarları */
-        footer {
-            margin-top: 40px;
-            padding: 15px;
-            background-color: #d8bfd8; 
-            text-align: center;
-            border-radius: 5px;
-        }
-
-        footer p {
-            margin: 0;
-            color: white;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style/hafta2.css">
 </head>
 <body>
 
@@ -132,8 +11,6 @@
         <nav>
             <ul>
                 <li><a href="index.html">← Ana Sayfaya Dön</a></li>
-                <li><a href="about.html">Hakkında</a></li>
-                <li><a href="contact.html">İletişim</a></li>
             </ul>
         </nav>
     </header>
@@ -159,9 +36,8 @@
     </main>
 
     <footer>
-        <p>© 2026 CSS Örnek.</p>
+        <p>© 2026 <strong>Nilay Kuru</strong> CSS Örnek.</p>
     </footer>
 
 </body>
 </html>
-
