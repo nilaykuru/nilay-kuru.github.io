@@ -1,221 +1,400 @@
-<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nilay Kuru - Ana Sayfa</title>
+    <title>Nilay Kuru – Web Programlama</title>
     <style>
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        h1, h2, p {
+        h1, h2, h3, p, span, a, button {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            min-height: 100vh;
             background-color: #fcf9fc;
             color: #4a235a;
-            padding: 20px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden; 
         }
 
-        header {
-            border-bottom: 2px solid #d8bfd8;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+        /* ---- UÇUŞAN ÇİÇEKLER ---- */
+        .cicek {
+            position: fixed;
+            top: -10%;
+            z-index: 0; 
+            user-select: none;
+            pointer-events: none; 
+            opacity: 0.5; 
+            animation: cicekYagisi linear infinite;
         }
 
-        header h1 {
-            display: inline-block;
-            margin: 0;
-            color: #9370db;
+        @keyframes cicekYagisi {
+            0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(30px); opacity: 0; }
         }
 
-        header p {
-            color: #7a4d8a;
-            margin-top: 4px;
-            font-size: 0.95rem;
-        }
-
-        nav { margin-top: 12px; }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline-block;
-            margin-right: 8px;
-            margin-bottom: 6px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            background-color: #d8bfd8;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        nav ul li a:hover {
-            background-color: #ffb6c1;
-            color: #fff;
-        }
-
-        nav ul li a.highlight {
-            background-color: #9370db;
-        }
-
-        nav ul li a.highlight:hover {
-            background-color: #ffb6c1;
-        }
-
-        main { max-width: 900px; margin: 0 auto; }
-
-        .intro {
-            background-color: #fff0f5;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #ffb6c1;
-        }
-
-        .intro p {
-            font-size: 15px;
-            line-height: 1.6;
-            text-align: justify;
-            color: #555;
-        }
-
-        .kutu-kapsayici {
+        /* ---- Ana Kart ---- */
+        .ana-kart {
+            background-color: #fff0f5; 
+            border-radius: 20px;
+            padding: 48px 52px 40px;
+            max-width: 880px; /* Genişliği 4 kutunun rahat sığacağı şekilde minik esnettik */
             width: 100%;
-            font-size: 0;
-            margin-bottom: 30px;
+            box-shadow: 0 4px 32px rgba(255, 182, 193, 0.2);
+            border: 2px solid #ffb6c1; 
+            position: relative;
+            z-index: 10; 
         }
 
-        .icerik-kutusu, .yan-menu-kutusu {
-            display: inline-block;
-            vertical-align: top;
-            box-sizing: border-box;
-            border-radius: 8px;
-            padding: 20px;
-            font-size: 15px;
-        }
-
-        .icerik-kutusu {
-            width: 60%;
-            background-color: #fff0f5;
-            border: 2px solid #ffb6c1;
-            margin-right: 4%;
-        }
-
-        .yan-menu-kutusu {
-            width: 36%;
-            background-color: #f3e5f5;
-            border: 2px solid #d8bfd8;
-        }
-
-        .icerik-kutusu p, .yan-menu-kutusu p {
-            font-size: 15px;
-            line-height: 1.6;
-            text-align: justify;
-            color: #555;
-        }
-
-        .icerik-kutusu h2, .yan-menu-kutusu h2 {
-            color: #9370db;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .icerik-kutusu ul, .icerik-kutusu ol {
-            padding-left: 1.3rem;
-            margin: 8px 0;
-        }
-
-        .icerik-kutusu li {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 4px;
-        }
-
-        .icerik-kutusu a { color: #9370db; text-decoration: underline; }
-        .icerik-kutusu strong { color: #4a235a; }
-
-        footer {
-            margin-top: 40px;
-            padding: 15px;
-            background-color: #d8bfd8;
+        /* ---- Hero Alanı ---- */
+        .hero {
             text-align: center;
-            border-radius: 5px;
+            margin-bottom: 36px;
         }
 
-        footer p { margin: 0; color: white; font-weight: bold; }
+        .badge-ders {
+            display: inline-block;
+            background-color: #f3e5f5;
+            color: #7a4d8a;
+            border: 1px solid #d8bfd8;
+            border-radius: 20px;
+            padding: 5px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #9370db; 
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #7a4d8a;
+            font-size: 0.97rem;
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto 28px;
+        }
+
+        /* ---- Butonlar ---- */
+        .btn-grup {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+
+        .btn-birincil {
+            background-color: #9370db;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 26px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.25s, transform 0.15s, color 0.25s;
+            display: inline-block;
+        }
+
+        .btn-birincil:hover { background-color: #ffb6c1; color: #4a235a; transform: translateY(-2px); }
+
+        .btn-ikincil {
+            background-color: #fff;
+            color: #4a235a;
+            border: 2px solid #d8bfd8;
+            border-radius: 10px;
+            padding: 11px 26px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.25s, border-color 0.25s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .btn-ikincil:hover { background-color: #f3e5f5; border-color: #9370db; transform: translateY(-2px); }
+
+        /* ---- Hafta Kartları Grid ---- */
+        .ayrac {
+            border: none;
+            border-top: 1.5px solid #ffb6c1;
+            margin: 32px 0;
+        }
+
+        .hafta-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px; /* Boşluklar */
+            justify-content: center; /* 4 ÜSTTE 3 ALTTA DÜZENİNİN SIRRI BURADA */
+        }
+
+        /* ---- TATLI ANİMASYON ---- */
+        @keyframes tatliYuzme {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+
+        .hareketli {
+            animation: tatliYuzme 3.5s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .hareketli:nth-child(1) { animation-delay: 0.0s; }
+        .hareketli:nth-child(2) { animation-delay: 0.2s; }
+        .hareketli:nth-child(3) { animation-delay: 0.4s; }
+        .hareketli:nth-child(4) { animation-delay: 0.6s; }
+        .hareketli:nth-child(5) { animation-delay: 0.8s; }
+        .hareketli:nth-child(6) { animation-delay: 1.0s; }
+        .hareketli:nth-child(7) { animation-delay: 1.2s; }
+
+        .hareketli:hover {
+            animation: none !important;
+            transform: translateY(-4px) scale(1.03) !important;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4) !important;
+            z-index: 10;
+        }
+
+        /* Sabit Genişlikli Hafta Kutuları */
+        .hafta-kutu, .hafta-1-container, .hafta-6-container {
+            flex: 0 0 175px; /* Kutuların genişliği sabitlendi, böylece 4 - 3 düzeni kırılmaz */
+            background-color: #fff;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+            cursor: pointer;
+            display: block;
+        }
+
+        .hafta-kutu {
+            padding: 16px 18px;
+        }
+
+        .hafta-kutu h3 { font-size: 0.9rem; font-weight: 700; color: #4a235a; margin-bottom: 4px; transition: color 0.3s; }
+        .hafta-kutu p { font-size: 0.78rem; color: #7a4d8a; line-height: 1.4; transition: color 0.3s; }
+
+        .hafta-1-baslik, .hafta-6-baslik {
+            background-color: #fff;
+            border-bottom: 1.5px solid #d8bfd8;
+            border-radius: 12px 12px 0 0;
+            padding: 16px 18px 10px;
+            transition: all 0.3s;
+        }
+
+        .hafta-1-baslik h3, .hafta-6-baslik h3 { font-size: 0.9rem; font-weight: 700; color: #4a235a; margin-bottom: 2px; }
+        .hafta-1-baslik p, .hafta-6-baslik p { font-size: 0.75rem; color: #7a4d8a; }
+
+        .hafta-1-linkler, .hafta-6-linkler {
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .hafta-1-link, .hafta-6-link {
+            display: block;
+            padding: 7px 18px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #7a4d8a;
+            text-decoration: none;
+            border-top: 1px solid #f3e5f5;
+            background-color: #fff;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .hafta-1-link:first-child, .hafta-6-link:first-child { border-top: none; }
+        .hafta-1-link:hover, .hafta-6-link:hover { background-color: #fff0f5; color: #9370db; }
+
+        /* ---- Footer ---- */
+        footer { margin-top: 28px; text-align: center; font-size: 0.82rem; color: #7a4d8a; position: relative; z-index: 10; }
+        footer strong { color: #9370db; }
+
+        /* =============================================
+           KOYU MOD
+        ============================================= */
+        body.dark { background-color: #24142c; color: #fcf9fc; }
+        body.dark .ana-kart { background-color: #331d3f; border-color: #7a4d8a; box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4); }
+        body.dark .badge-ders { background-color: #4a235a; color: #f3e5f5; border-color: #7a4d8a; }
+        body.dark .hero h1 { color: #ffb6c1; }
+        body.dark .hero p  { color: #d8bfd8; }
+        body.dark .ayrac   { border-color: #4a235a; }
+        
+        body.dark .hafta-kutu, body.dark .hafta-1-baslik, body.dark .hafta-6-baslik { background-color: #3a2247; border-color: #4a235a; }
+        body.dark .hafta-kutu, body.dark .hafta-1-container, body.dark .hafta-6-container { border-color: #4a235a; }
+        body.dark .hafta-kutu h3, body.dark .hafta-1-baslik h3, body.dark .hafta-6-baslik h3 { color: #fff0f5; }
+        body.dark .hafta-kutu p, body.dark .hafta-1-baslik p, body.dark .hafta-6-baslik p  { color: #d8bfd8; }
+
+        body.dark .hafta-1-baslik, body.dark .hafta-6-baslik { border-bottom-color: #4a235a; }
+        body.dark .hafta-1-link, body.dark .hafta-6-link { background-color: #2e1a38; border-top-color: #4a235a; color: #d8bfd8; }
+        body.dark .hafta-1-link:hover, body.dark .hafta-6-link:hover { background-color: #4a235a; color: #ffb6c1; }
+        
+        body.dark .btn-ikincil { background-color: #4a235a; color: #fff0f5; border-color: #7a4d8a; }
+        body.dark .btn-ikincil:hover { background-color: #7a4d8a; border-color: #ffb6c1; }
+        body.dark footer { color: #d8bfd8; }
+
+        /* ---- Koyu Mod Butonu ---- */
+        .tema-btn {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            background-color: #fff;
+            color: #4a235a;
+            border: 1.5px solid #d8bfd8;
+            border-radius: 50px;
+            padding: 7px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 100;
+        }
+
+        .tema-btn:hover { background-color: #ffb6c1; border-color: #9370db; color: #4a235a; }
+        body.dark .tema-btn { background-color: #4a235a; color: #fff0f5; border-color: #7a4d8a; }
+        body.dark .tema-btn:hover { background-color: #7a4d8a; border-color: #ffb6c1; }
+
+        /* Mobil Cihazlar İçin */
+        @media (max-width: 768px) {
+            .ana-kart { padding: 30px 20px 28px; }
+            .hero h1  { font-size: 1.7rem; }
+            .hafta-kutu, .hafta-1-container, .hafta-6-container { flex: 1 1 45%; max-width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Nilay Kuru</h1>
-        <p>Bilgisayar Mühendisliği | Web Programlama Öğrencisi</p>
-        <nav>
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li><a href="about.html">Hakkımda</a></li>
-                <li><a href="interests.html">İlgi Alanlarım</a></li>
-                <li><a href="css-odevi.html">CSS Ödevi</a></li>
-                <li><a href="flexbox-odevi.html">Flexbox Ödevi</a></li>
-                <li><a href="lab-position.html">Position Ödevi</a></li>
-                <li><a href="hafta6-uygulama1.html" >H6 – Not Hesapla</a></li>
-                <li><a href="hafta6-uygulama2.html" >H6 – Birim Dönüştür</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+    <button class="tema-btn" id="temaBtn" onclick="temaToggle()">🌙 Koyu Mod</button>
 
-    <main>
-        <section class="intro">
-            <p>Bu web sitesi, Web Programlama dersi kapsamında hazırlanmış <strong>örnek bir kişisel tanıtım sayfasıdır</strong>. Amaç, HTML'in temel etiketlerini ve sayfa yapısını öğrenmektir. Daha fazla bilgi için <em>Hakkımda</em> sayfasını ziyaret edebilirsiniz.</p>
-        </section>
+    <div class="ana-kart">
 
-        <div class="kutu-kapsayici">
-            <div class="icerik-kutusu">
-                <h2>Hızlı Bilgiler</h2>
-                <ul>
-                    <li>Üniversite: Marmara Üniversitesi</li>
-                    <li>Bölüm: Bilgisayar Mühendisliği</li>
-                    <li>İlgi Alanı: Web Teknolojileri</li>
-                </ul>
+        <div class="hero">
+            <div class="badge-ders">Web Programlama Dersi</div>
+            <h1>Laboratuvar Ana Sayfası</h1>
+            <p>Bu sayfa GitHub Pages üzerinde yayınlanan laboratuvar uygulamalarına giriş için hazırlanmıştır.</p>
+            
+            <div class="btn-grup">
+                <a href="hafta7.html" class="btn-birincil">Hafta 7 Uygulamasına Git</a>
+                <a href="#haftalar" class="btn-ikincil" onclick="kaydir(event, 'haftalar')">Diğer Haftalar</a>
+            </div>
+        </div>
 
-                <h2>Öğrenme Hedeflerim</h2>
-                <ol>
-                    <li>HTML temellerini öğrenmek</li>
-                    <li>CSS ile sayfa tasarlamak</li>
-                    <li>JavaScript ile etkileşim eklemek</li>
-                    <li>ASP.NET Core ile dinamik site geliştirmek</li>
-                </ol>
+        <hr class="ayrac">
+
+        <div class="hafta-grid" id="haftalar">
+
+            <div class="hafta-1-container hareketli">
+                <div class="hafta-1-baslik">
+                    <h3>Hafta 1</h3>
+                    <p>Kişisel Sayfa</p>
+                </div>
+                <div class="hafta-1-linkler">
+                    <a href="about.html"     class="hafta-1-link">Hakkımda</a>
+                    <a href="interests.html" class="hafta-1-link">İlgi Alanlarım</a>
+                    <a href="contact.html"   class="hafta-1-link">İletişim</a>
+                </div>
             </div>
 
-            <aside class="yan-menu-kutusu">
-                <h2>Faydalı Bağlantılar</h2>
-                <p>Aşağıdaki kaynaklar web geliştirme öğrenirken faydalı olabilir:</p>
-                <p>
-                    <a href="https://developer.mozilla.org/tr/">MDN Web Docs</a><br><br>
-                    <a href="https://www.w3schools.com/">W3Schools</a><br><br>
-                    <a href="https://github.com/">GitHub</a>
-                </p>
-            </aside>
+            <a href="css-odevi.html" class="hafta-kutu hareketli">
+                <h3>Hafta 2</h3>
+                <p>HTML + CSS</p>
+            </a>
+
+            <a href="flexbox-odevi.html" class="hafta-kutu hareketli">
+                <h3>Hafta 3</h3>
+                <p>Form Yapıları</p>
+            </a>
+
+            <a href="flexbox-odevi.html" class="hafta-kutu hareketli">
+                <h3>Hafta 4</h3>
+                <p>Flexbox</p>
+            </a>
+
+            <a href="lab-position.html" class="hafta-kutu hareketli">
+                <h3>Hafta 5</h3>
+                <p>Position</p>
+            </a>
+
+            <div class="hafta-6-container hareketli">
+                <div class="hafta-6-baslik">
+                    <h3>Hafta 6</h3>
+                    <p>JavaScript</p>
+                </div>
+                <div class="hafta-6-linkler">
+                    <a href="hafta6-uygulama1.html" class="hafta-6-link">Not Hesapla</a>
+                    <a href="hafta6-uygulama2.html" class="hafta-6-link">Birim Dönüştür</a>
+                </div>
+            </div>
+
+            <a href="hafta7.html" class="hafta-kutu hareketli">
+                <h3>Hafta 7</h3>
+                <p>Bootstrap +<br>JavaScript</p>
+            </a>
+
         </div>
-    </main>
+
+    </div>
 
     <footer>
-        <p>© 2026 Nilay Kuru | Web Programlama Dersi</p>
+        <p>© 2026 <strong>Nilay Kuru</strong> | Web Programlama Dersi – Marmara Üniversitesi</p>
     </footer>
+
+    <script>
+        // ---- ÇİÇEK YAĞMURU OLUŞTURMA ----
+        function cicekOlustur() {
+            const body = document.body;
+            const cicekSayisi = 40; 
+
+            for (let i = 0; i < cicekSayisi; i++) {
+                let cicek = document.createElement('div');
+                cicek.innerHTML = '🌸';
+                cicek.classList.add('cicek');
+                
+                cicek.style.left = Math.random() * 100 + 'vw';
+                cicek.style.animationDuration = (Math.random() * 5 + 6) + 's'; 
+                cicek.style.animationDelay = (Math.random() * 5) + 's';
+                cicek.style.fontSize = (Math.random() * 10 + 12) + 'px';
+
+                body.appendChild(cicek);
+            }
+        }
+
+        window.onload = cicekOlustur;
+
+        // ---- TEMA VE KAYDIRMA İŞLEMLERİ ----
+        function temaToggle() {
+            var body = document.body;
+            var btn  = document.getElementById('temaBtn');
+            body.classList.toggle('dark');
+            btn.textContent = body.classList.contains('dark') ? '☀️ Açık Mod' : '🌙 Koyu Mod';
+        }
+
+        function kaydir(e, hedefId) {
+            e.preventDefault(); 
+            document.getElementById(hedefId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
 
 </body>
 </html>
