@@ -308,6 +308,28 @@ body {
     display: inline-block;
     color: #4a235a;
 }
+/* ---- Modern Sabit Geri Butonu ---- */
+.fixed-back {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    z-index: 1000;
+    background-color: #9370db;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(147, 112, 219, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fixed-back:hover {
+    background-color: #ffb6c1;
+    color: #4a235a;
+    transform: scale(1.05) translateX(5px);
+}
 
 /* Kutu 1 — açık pembe */
 .box1 {
