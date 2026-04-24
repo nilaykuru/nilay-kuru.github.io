@@ -1,9 +1,10 @@
+/* Genel Sayfa Ayarları */
 body {
     font-family: Arial, sans-serif;
     background-color: #fcf9fc; 
     margin: 0;
-    padding: 20px 50px;
     color: #4a235a;
+    padding: 80px 50px 20px 50px; /* Üstten 80px boşluk bıraktık */
 }
 
 /* İstenen Kural: 1 Adet Grup Seçici */
@@ -102,6 +103,28 @@ nav ul li a:hover {
     color: #555;                
 }
 
+/* ---- Modern Sabit Geri Butonu ---- */
+.fixed-back {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    z-index: 1000;
+    background-color: #9370db;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(147, 112, 219, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fixed-back:hover {
+    background-color: #ffb6c1;
+    color: #4a235a;
+    transform: scale(1.05) translateX(5px);
+}
 /* Footer Ayarları */
 footer {
     margin-top: 40px;
