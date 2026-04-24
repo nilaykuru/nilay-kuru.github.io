@@ -1,0 +1,296 @@
+body {
+    background-color: #fcf9fc;
+    color: #4a235a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+    overflow-x: hidden; /* Yatay kaydırmayı önlemek için eklendi */
+}
+
+/* ---- UÇUŞAN ÇİÇEKLER ---- */
+.cicek {
+    position: fixed;
+    top: -10%;
+    z-index: 9999 !important; /* GÜNCELLEME: Çiçekler EN ÖNE alındı! */
+    user-select: none;
+    pointer-events: none; /* Çiçekler form tıklamalarını engellemesin diye */
+    opacity: 0.6; /* Görünürlük biraz artırıldı */
+    animation: cicekYagisi linear infinite;
+}
+
+@keyframes cicekYagisi {
+    0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(30px); opacity: 0; }
+}
+
+/* ---- Navbar ---- */
+.nk-navbar {
+    background-color: #fff0f5 !important;
+    border-bottom: 1px solid #f3e5f5;
+    position: relative;
+    z-index: 10; /* Navbar çiçeklerin üstünde kalsın */
+}
+
+.nk-navbar .navbar-brand {
+    color:   #9370db !important;
+}
+
+.nk-navbar .nav-link {
+    color: #7a4d8a !important;
+    font-weight: 500;
+}
+
+.nk-navbar .nav-link:hover,
+.nk-navbar .nav-link.active {
+    color: #9370db  !important;
+}
+
+/* ---- Bölümler ---- */
+.nk-section     { background-color: #fcf9fc; position: relative; z-index: 1; }
+.nk-section-alt { background-color: #fff0f5; position: relative; z-index: 1; }
+
+/* ---- Hero ---- */
+.nk-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%);
+    border-bottom: 1px solid #f3e5f5;
+    position: relative;
+    z-index: 1;
+}
+
+/* ---- Yazılar ---- */
+.nk-heading { color: #4a235a   ; }
+.nk-text    { color: #7a4d8a; }
+.nk-label   { color: #7a4d8a; font-weight: 600; }
+
+/* ---- Kartlar ---- */
+.nk-card {
+    background-color: #ffffff;
+    border: 1px solid #f3e5f5 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 16px rgba(255, 182, 193, 0.12);
+    transition: all 0.25s ease;
+}
+
+.nk-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(255, 182, 193, 0.25);
+}
+
+/* ---- List ---- */
+.nk-list .list-group-item {
+    border-color: #f3e5f5;
+    color: #7a4d8a;
+    background-color: transparent;
+}
+
+/* ---- Badge ---- */
+.nk-badge {
+    background-color: #ffb6c1;
+    color: #4a235a;
+}
+
+.nk-badge-blue   { background-color: #c7d7ff; color: #2a3a7a; }
+.nk-badge-green  { background-color: #d6f5e3; color: #1a5c35; }
+.nk-badge-yellow { background-color: #fff3c4; color: #5c4100; }
+.nk-badge-dark   { background-color: #4a235a; color: #fff0f5; }
+
+/* ---- Info Kartlar ---- */
+.nk-info-card {
+    border: 1px solid #f3e5f5;
+}
+
+.nk-info-blue   { background-color: #eef4ff; color: #2a3a7a; }
+.nk-info-green  { background-color: #e9f9f0; color: #1a5c35; }
+.nk-info-yellow { background-color: #fff9e6; color: #5c4100; }
+.nk-info-lilac  { background-color: #f3e5f5; color: #4a235a; }
+
+/* ---- Butonlar ---- */
+.nk-btn-primary {
+    background-color: #ffb6c1;
+    color: #4a235a;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.nk-btn-primary:hover {
+    background-color: #9370db;
+    color: #fff;
+}
+
+.nk-btn-outline {
+    border: 1.5px solid #d8bfd8;
+    color: #7a4d8a;
+}
+
+.nk-btn-outline:hover {
+    background-color: #fff0f5;
+    border-color: #ffb6c1;
+    color: #4a235a;
+}
+
+/* Kart butonları */
+.nk-btn-card-blue   { border: 1px solid #aac4ff; color: #3a5aa8; }
+.nk-btn-card-blue:hover   { background: #aac4ff; color: #fff; }
+
+.nk-btn-card-green  { border: 1px solid #8fd4ac; color: #2f7a50; }
+.nk-btn-card-green:hover  { background: #8fd4ac; color: #fff; }
+
+.nk-btn-card-yellow { border: 1px solid #f0d070; color: #8a6500; }
+.nk-btn-card-yellow:hover { background: #f0d070; color: #fff; }
+
+/* ---- Form ---- */
+.nk-input {
+    border: 1.5px solid #f3e5f5 !important;
+    border-radius: 8px !important;
+    background-color: #fff !important;
+    color: #4a235a !important;
+}
+
+.nk-input:focus {
+    border-color: #ffb6c1 !important;
+    box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
+}
+
+/* ---- Alert ---- */
+.nk-alert {
+    background-color: #fff0f5;
+    border: 1px solid #ffb6c1;
+    color: #7a1040;
+}
+
+/* ---- Sonuç ---- */
+.nk-sonuc-bos {
+    background-color: #f9fcfc;
+    border: 1px solid #d8eeee;
+    color: #3a6a6a;
+}
+
+.nk-sonuc-kart {
+    background-color: #fff0f5;
+    border: 1.5px solid #ffb6c1;
+    border-radius: 12px;
+}
+
+.nk-sonuc-satir {
+    border-bottom: 1px solid #f3e5f5;
+    color: #7a4d8a;
+}
+
+.nk-sonuc-satir strong {
+    color: #9370db;
+}
+
+/* ---- Footer ---- */
+.nk-footer {
+    background-color: #fff0f5;
+    color: #7a4d8a;
+    border-top: 1px solid #f3e5f5;
+    position: relative;
+    z-index: 10; /* Çiçeklerin üstünde kalsın */
+}
+
+/* =============================================
+   DARK MODE — YENİ RENK PALETİ
+   ============================================= */
+body.dark-mode {
+    background-color: #24142c; 
+    color: #fcf9fc;            
+}
+
+/* Sabit Arka Planlı Bölümler ve Navbar */
+body.dark-mode .nk-section {
+    background-color: #24142c !important; 
+}
+
+body.dark-mode .nk-section-alt,
+body.dark-mode .nk-footer,
+body.dark-mode .nk-navbar {
+    background-color: #2e1a38 !important; 
+    border-color: #4a235a !important;
+}
+
+/* Hero Alanı */
+body.dark-mode .nk-hero {
+    background: linear-gradient(135deg, #331d3f 0%, #24142c 100%);
+    border-bottom: 1px solid #4a235a;
+}
+
+/* Kartlar */
+body.dark-mode .nk-card {
+    background-color: #331d3f !important; 
+    border-color: #7a4d8a !important;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .nk-heading,
+body.dark-mode .nk-navbar .navbar-brand {
+    color: #ffb6c1 !important; 
+}
+
+body.dark-mode .nk-text,
+body.dark-mode .nk-label,
+body.dark-mode .nk-navbar .nav-link {
+    color: #d8bfd8 !important; 
+}
+
+/* Butonlar */
+body.dark-mode .nk-btn-primary {
+    background-color: #9370db;
+    color: #fff;
+}
+
+body.dark-mode .nk-btn-primary:hover {
+    background-color: #ffb6c1;
+    color: #4a235a;
+}
+
+body.dark-mode .nk-btn-outline {
+    background-color: #4a235a;
+    color: #fff0f5;
+    border-color: #7a4d8a;
+}
+
+body.dark-mode .nk-btn-outline:hover {
+    background-color: #7a4d8a;
+    border-color: #ffb6c1;
+}
+
+/* Listeler ve Formlar */
+body.dark-mode .nk-list .list-group-item,
+body.dark-mode .nk-sonuc-satir {
+    background-color: #2e1a38;
+    border-color: #4a235a;
+    color: #d8bfd8;
+}
+
+body.dark-mode .nk-input {
+    background-color: #2e1a38 !important; 
+    border-color: #4a235a !important;
+    color: #fcf9fc !important;
+}
+
+body.dark-mode .nk-badge {
+    background-color: #4a235a;
+    color: #f3e5f5;
+    border: 1px solid #7a4d8a;
+}
+
+/* Alert ve Boş Sonuç */
+body.dark-mode .nk-alert,
+body.dark-mode .nk-sonuc-bos {
+    background-color: #2e1a38; 
+    border-color: #4a235a;
+    color: #d8bfd8;
+}
+
+/* Sonuç Kartı */
+body.dark-mode .nk-sonuc-kart {
+    background-color: #3a2247;
+    border-color: #7a4d8a;
+}
+
+body.dark-mode .nk-sonuc-satir strong {
+    color: #ffb6c1;
+}
